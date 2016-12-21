@@ -7,7 +7,11 @@ import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
-	@Override
+	
+	Filewalker filewalker;
+	String filepath = "D:\\Eric\\Music\\Boston\\";
+	
+	@Override	
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = new BorderPane();
@@ -20,6 +24,9 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Ultra File Manager");
 			primaryStage.show();
+			
+			//filewalker = new Filewalker(filepath);
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
