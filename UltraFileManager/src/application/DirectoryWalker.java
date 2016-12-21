@@ -11,18 +11,27 @@ public class DirectoryWalker {
         File root = new File( path ); 
         File[] list = root.listFiles(); 
 
-        for ( File f : list ) { 
-            if ( f.isDirectory() ) { 
-                walk( f.getAbsolutePath() ); 
-                System.out.print( "Dir: ");
-                printFileDetails(f);
-            } 
+        if (list == null)
+        {
+        	return;
+        }
+        
+        for (int i = 0; i < list.length; i++) 
+        {
+        	if (list[i] != null)
+        	{       	
+	            if ( list[i].isDirectory() ) { 
+	                walk( list[i].getAbsolutePath() ); 
+	                System.out.print( "Dir: ");
+	                printFileDetails(list[i]);
+	            }
+        	}
         } 
     } 
 
 	private void printFileDetails(File file) throws IOException {
 		BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-		System.out.println(file.getName() + "\t" + attr.lastModifiedTime() + "\t" + attr.creationTime() + "\t" + getExtension(file) + "\t" + attr.size() );
+		System.out.println(file.getName() + "\t" + attr.lastModifiedTime() + "\t" + attr.creationTime() + "\t" + getExtension(file) + "\t" + attr.size() + "\t Parent: " + file.getParent());
 	}
 	
 	private String getExtension (File file) {
