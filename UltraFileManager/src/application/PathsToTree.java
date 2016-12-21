@@ -53,7 +53,7 @@ public class PathsToTree {
              	out.print("\t");
              }
             out.print("<li>");
-            out.print(child.getKey() + "\t" + count);
+            out.print(count + "\t" + child.getKey());
             out.println();
             printHtml(child.getValue(), out);
             for (int j = 0; j <= count; j++)
