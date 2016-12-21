@@ -18,8 +18,9 @@ public class Main extends Application {
 	
 	static DirectoryWalker directoryWalker = new DirectoryWalker();
 	static String directorypath = "C:\\Users\\Eric\\Documents";
-	static List<File> directoryList = new ArrayList<File>();
+	static List<File> directoryUnorderedList = new ArrayList<File>();
 	static DirectoryPathsToTree directoryPathsToTree = new DirectoryPathsToTree();
+	static List<Directory> directoryTreeList;
 	
 	@Override	
 	public void start(Stage primaryStage) {
@@ -39,7 +40,11 @@ public class Main extends Application {
 			primaryStage.setTitle("Ultra File Manager");
 			primaryStage.show();
 			
-
+			for(int i = 0; i < directoryTreeList.size(); i++)
+			{
+				System.out.println(directoryTreeList.get(i).getPath() + "\t" + directoryTreeList.get(i).getTreeLevel());
+			}
+			
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -63,8 +68,8 @@ public class Main extends Application {
 	
 	private static void loadNavigationPaneInfo () {
 		try {
-			directoryList = directoryWalker.getDirectoryList(directorypath);
-			directoryPathsToTree.print(directoryList);
+			directoryUnorderedList = directoryWalker.getDirectoryList(directorypath);
+			directoryTreeList = directoryPathsToTree.getList(directoryUnorderedList);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
