@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +16,10 @@ import javafx.scene.layout.VBox;
 
 public class Main extends Application {
 	
-	//Filewalker filewalker;
-	//String filepath = "D:\\Eric\\Music\\Boston\\";
-	
-	DirectoryWalker directoryWalker = new DirectoryWalker();
-	String directorypath = "C:\\Users\\Eric\\Documents";
-	List<File> directoryList = new ArrayList<File>();
-	DirectoryPathsToTree directoryPathsToTree = new DirectoryPathsToTree();
+	static DirectoryWalker directoryWalker = new DirectoryWalker();
+	static String directorypath = "C:\\Users\\Eric\\Documents";
+	static List<File> directoryList = new ArrayList<File>();
+	static DirectoryPathsToTree directoryPathsToTree = new DirectoryPathsToTree();
 	
 	@Override	
 	public void start(Stage primaryStage) {
@@ -41,18 +39,7 @@ public class Main extends Application {
 			primaryStage.setTitle("Ultra File Manager");
 			primaryStage.show();
 			
-			//filewalker = new Filewalker(filepath);
-			
-			directoryList = directoryWalker.getDirectoryList(directorypath);
-			
-//			for(int i = 0; i < directoryList.size(); i++)
-//			{
-//				System.out.println(directoryList.get(i).getName());
-//			}
-			
-			//String [] pathlist = {"C:\\Music\\Blur\\Leisure", "C:\\Music\\KateBush\\WholeStory\\Disc1", "C:\\Music\\KateBush\\WholeStory\\Disc2", "C:\\Music\\KateBush\\TheKickInside", "C:\\Music\\KateBush\\TheDreaming", "C:\\MusicUnprocessed\\Blue\\ParkLife"};
-			
-			directoryPathsToTree.print(directoryList);
+
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -74,7 +61,19 @@ public class Main extends Application {
 		  return stackedTitledPanes;
 	}
 	
+	private static void loadNavigationPaneInfo () {
+		try {
+			directoryList = directoryWalker.getDirectoryList(directorypath);
+			directoryPathsToTree.print(directoryList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	public static void main(String[] args) {
+		loadNavigationPaneInfo();
 		launch(args);
 	}
 }
