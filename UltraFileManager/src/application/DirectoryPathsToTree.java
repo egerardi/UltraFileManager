@@ -2,6 +2,7 @@ package application;
 
 import java.io.File;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.regex.Pattern;
 
 public class DirectoryPathsToTree {
 	
+	static List<Directory> directoryList;
 	static int count = -1;
 	
     public static class Node {
@@ -39,52 +41,80 @@ public class DirectoryPathsToTree {
             node = node.getChild(name);
     }
 
-    private static void printHtml(Node node, PrintStream out) {
+    private static void createList (Node node) {
         Map<String, Node> children = node.getChildren();
         if (children.isEmpty())
-            return;
-        for (int j = 0; j < count; j++)
         {
-        	out.print("\t");
+            return;
         }
+        
         count++;
-        out.println("<ul>");
+        
         for (Map.Entry<String, Node> child : children.entrySet()) {
-        	 for (int j = 0; j <= count; j++)
-             {
-             	out.print("\t");
-             }
-            out.print("<li>");
-            out.print(count + "\t" + child.getKey());
-            out.println();
-            printHtml(child.getValue(), out);
-            for (int j = 0; j <= count; j++)
-            {
-            	out.print("\t");
-            }
-            out.println("</li>");
+        	Directory dir = new Directory(child.getKey(), count);
+        	directoryList.add(dir);
+            createList(child.getValue());
         }
         count--;
-        for (int j = 0; j < count; j++)
-        {
-        	out.print("\t");
-        }
-        out.println("</ul>");
     }
 
-    private void printHtml(PrintStream out) {
-        printHtml(root, out);
-    }
-
-    public void print(List<File> pathlist) {
+    public List<Directory> getList (List<File> pathlist) {
         for(int i = 0; i < pathlist.size(); i++)
     	{
     		addPath(pathlist.get(i).getPath());
     	}
+        createList(root);
         
-        printHtml(System.out);
+        return directoryList;
     }
     
+//    private static void printHtml(Node node, PrintStream out) {
+//        Map<String, Node> children = node.getChildren();
+//        if (children.isEmpty())
+//            return;
+//        for (int j = 0; j < count; j++)
+//        {
+//        	out.print("\t");
+//        }
+//        count++;
+//        out.println("<ul>");
+//        for (Map.Entry<String, Node> child : children.entrySet()) {
+//        	 for (int j = 0; j <= count; j++)
+//             {
+//             	out.print("\t");
+//             }
+//            out.print("<li>");
+//            out.print(count + "\t" + child.getKey());
+//            out.println();
+//            printHtml(child.getValue(), out);
+//            for (int j = 0; j <= count; j++)
+//            {
+//            	out.print("\t");
+//            }
+//            out.println("</li>");
+//        }
+//        count--;
+//        for (int j = 0; j < count; j++)
+//        {
+//        	out.print("\t");
+//        }
+//        out.println("</ul>");
+//    }
+//
+//    private void printHtml(PrintStream out) {
+//        printHtml(root, out);
+//    }
+//
+//    public void print(List<File> pathlist) {
+//        for(int i = 0; i < pathlist.size(); i++)
+//    	{
+//    		addPath(pathlist.get(i).getPath());
+//    	}
+//        
+//        printHtml(System.out);
+//    }
+    
     public DirectoryPathsToTree() {
+    	directoryList = new ArrayList<>(1000);
     }
 }
