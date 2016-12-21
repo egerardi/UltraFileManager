@@ -1,7 +1,9 @@
 package application;
 
+import java.io.File;
 import java.io.PrintStream;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -70,16 +72,19 @@ public class DirectoryPathsToTree {
         out.println("</ul>");
     }
 
-    public void printHtml(PrintStream out) {
+    private void printHtml(PrintStream out) {
         printHtml(root, out);
     }
 
-    public DirectoryPathsToTree(String[] pathlist) {
-        for(int i = 0; i < pathlist.length; i++)
+    public void print(List<File> pathlist) {
+        for(int i = 0; i < pathlist.size(); i++)
     	{
-    		addPath(pathlist[i]);
+    		addPath(pathlist.get(i).getPath());
     	}
         
         printHtml(System.out);
+    }
+    
+    public DirectoryPathsToTree() {
     }
 }
