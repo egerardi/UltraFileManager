@@ -1,5 +1,9 @@
 package application;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -8,13 +12,14 @@ import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 	
-	Filewalker filewalker;
-	String filepath = "D:\\Eric\\Music\\Boston\\";
+	//Filewalker filewalker;
+	//String filepath = "D:\\Eric\\Music\\Boston\\";
 	
-	DirectoryWalker directoryWalker;
-	String directorypath = "C:\\Users\\Eric\\Documents\\Compiler";
+	DirectoryWalker directoryWalker = new DirectoryWalker();
+	String directorypath = "C:\\Users\\Eric\\Documents";
+	List<File> directoryList = new ArrayList<File>();
 	
-	PathsToTree pathsToTree;
+	//DirectoryPathsToTree directoryPathsToTree;
 	
 	@Override	
 	public void start(Stage primaryStage) {
@@ -32,11 +37,16 @@ public class Main extends Application {
 			
 			//filewalker = new Filewalker(filepath);
 			
-			//directoryWalker = new DirectoryWalker(directorypath);
+			directoryList = directoryWalker.getDirectoryList(directorypath);
 			
-			String [] pathlist = {"C:\\Music\\Blur\\Leisure", "C:\\Music\\KateBush\\WholeStory\\Disc1", "C:\\Music\\KateBush\\WholeStory\\Disc2", "C:\\Music\\KateBush\\TheKickInside", "C:\\Music\\KateBush\\TheDreaming", "C:\\MusicUnprocessed\\Blue\\ParkLife"};
+			for(int i = 0; i < directoryList.size(); i++)
+			{
+				System.out.println(directoryList.get(i).getName());
+			}
 			
-			pathsToTree = new PathsToTree(pathlist);
+			//String [] pathlist = {"C:\\Music\\Blur\\Leisure", "C:\\Music\\KateBush\\WholeStory\\Disc1", "C:\\Music\\KateBush\\WholeStory\\Disc2", "C:\\Music\\KateBush\\TheKickInside", "C:\\Music\\KateBush\\TheDreaming", "C:\\MusicUnprocessed\\Blue\\ParkLife"};
+			
+			//directoryPathsToTree = new DirectoryPathsToTree(pathlist);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
