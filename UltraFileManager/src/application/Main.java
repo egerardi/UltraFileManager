@@ -19,7 +19,7 @@ public class Main extends Application {
 	String directorypath = "C:\\Users\\Eric\\Documents";
 	List<File> directoryList = new ArrayList<File>();
 	
-	//DirectoryPathsToTree directoryPathsToTree;
+	DirectoryPathsToTree directoryPathsToTree = new DirectoryPathsToTree();
 	
 	@Override	
 	public void start(Stage primaryStage) {
@@ -39,14 +39,14 @@ public class Main extends Application {
 			
 			directoryList = directoryWalker.getDirectoryList(directorypath);
 			
-			for(int i = 0; i < directoryList.size(); i++)
-			{
-				System.out.println(directoryList.get(i).getName());
-			}
+//			for(int i = 0; i < directoryList.size(); i++)
+//			{
+//				System.out.println(directoryList.get(i).getName());
+//			}
 			
 			//String [] pathlist = {"C:\\Music\\Blur\\Leisure", "C:\\Music\\KateBush\\WholeStory\\Disc1", "C:\\Music\\KateBush\\WholeStory\\Disc2", "C:\\Music\\KateBush\\TheKickInside", "C:\\Music\\KateBush\\TheDreaming", "C:\\MusicUnprocessed\\Blue\\ParkLife"};
 			
-			//directoryPathsToTree = new DirectoryPathsToTree(pathlist);
+			directoryPathsToTree.print(directoryList);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
