@@ -6,8 +6,11 @@ import java.util.List;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 
 public class Main extends Application {
@@ -18,13 +21,16 @@ public class Main extends Application {
 	DirectoryWalker directoryWalker = new DirectoryWalker();
 	String directorypath = "C:\\Users\\Eric\\Documents";
 	List<File> directoryList = new ArrayList<File>();
-	
 	DirectoryPathsToTree directoryPathsToTree = new DirectoryPathsToTree();
 	
 	@Override	
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = new BorderPane();
+						
+			
+			VBox myVBox = createStackedTitledPanes();
+			root.getChildren().add(myVBox);
 			
 			//Scene
 			Scene scene = new Scene(root,1200,800);
@@ -51,6 +57,21 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private VBox createStackedTitledPanes() {
+		final VBox stackedTitledPanes = new VBox();
+		Node contentNode1 = null;
+		Node contentNode2 = null;
+		Node contentNode3 = null;
+		stackedTitledPanes.getChildren().setAll(
+		    new TitledPane("Pane 1",  contentNode1),
+		    new TitledPane("Pane 2",  contentNode2),
+		    new TitledPane("Pane 3",  contentNode3)
+		  );
+		  ((TitledPane) stackedTitledPanes.getChildren().get(0)).setExpanded(true);
+
+		  return stackedTitledPanes;
 	}
 	
 	public static void main(String[] args) {
