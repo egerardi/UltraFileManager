@@ -11,6 +11,11 @@ public class Main extends Application {
 	Filewalker filewalker;
 	String filepath = "D:\\Eric\\Music\\Boston\\";
 	
+	DirectoryWalker directoryWalker;
+	String directorypath = "C:\\Users\\Eric\\Documents\\Compiler";
+	
+	PathsToTree pathsToTree;
+	
 	@Override	
 	public void start(Stage primaryStage) {
 		try {
@@ -26,6 +31,12 @@ public class Main extends Application {
 			primaryStage.show();
 			
 			//filewalker = new Filewalker(filepath);
+			
+			//directoryWalker = new DirectoryWalker(directorypath);
+			
+			String [] pathlist = {"C:\\Music\\Blur\\Leisure", "C:\\Music\\KateBush\\WholeStory\\Disc1", "C:\\Music\\KateBush\\WholeStory\\Disc2", "C:\\Music\\KateBush\\TheKickInside", "C:\\Music\\KateBush\\TheDreaming", "C:\\MusicUnprocessed\\Blue\\ParkLife"};
+			
+			pathsToTree = new PathsToTree(pathlist);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
