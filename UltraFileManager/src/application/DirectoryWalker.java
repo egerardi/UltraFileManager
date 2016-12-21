@@ -11,16 +11,17 @@ public class DirectoryWalker {
         File root = new File( path ); 
         File[] list = root.listFiles(); 
 
-        if (list == null)
+        if (list == null) //if list of files is null exit function
         {
         	return;
         }
         
         for (int i = 0; i < list.length; i++) 
         {
-        	if (list[i] != null)
+        	if (list[i] != null) //if list item (a file) is not null
         	{       	
-	            if ( list[i].isDirectory() ) { 
+	            if ( list[i].isDirectory() )
+	            { 
 	                walk( list[i].getAbsolutePath() ); 
 	                System.out.print( "Dir: ");
 	                printFileDetails(list[i]);
@@ -40,15 +41,15 @@ public class DirectoryWalker {
 		int i = extension.lastIndexOf('.');
 		int p = Math.max(extension.lastIndexOf('/'), extension.lastIndexOf('\\'));
 
-		if (i > p) {
+		if (i > p) 
+		{
 		    return extension.substring(i+1);
 		}
-		else {
+		else 
+		{
 			return "File Folder";
 		}
 	}
-	
-	
 	
     public DirectoryWalker (String filepath) throws IOException {
         walk(filepath); 
