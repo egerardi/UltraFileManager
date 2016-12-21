@@ -4,9 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DirectoryWalker {
-	public void walk( String path ) throws IOException { 
+	
+	List<File> directoryList;
+	
+	private void walk( String path ) throws IOException { 
 
         File root = new File( path ); 
         File[] list = root.listFiles(); 
@@ -20,14 +25,18 @@ public class DirectoryWalker {
         {
         	if (list[i] != null) //if list item (a file) is not null
         	{       	
-	            if ( list[i].isDirectory() )
-	            { 
-	                walk( list[i].getAbsolutePath() ); 
-	                System.out.print( "Dir: ");
-	                printFileDetails(list[i]);
+        		if ( ! list[i].isHidden() ) //if file is NOT hidden
+	            {
+		            if ( list[i].isDirectory() )
+		            { 
+		                walk( list[i].getAbsolutePath() );
+		                directoryList.add(list[i]);
+		                //System.out.print( "Dir: ");
+		                //printFileDetails(list[i]);
+		            }
 	            }
         	}
-        } 
+        }
     } 
 
 	private void printFileDetails(File file) throws IOException {
@@ -51,7 +60,12 @@ public class DirectoryWalker {
 		}
 	}
 	
-    public DirectoryWalker (String filepath) throws IOException {
-        walk(filepath); 
+	public List<File> getDirectoryList (String filepath) throws IOException {
+		walk(filepath);
+		return directoryList;
+	}
+	
+    public DirectoryWalker () {
+    	directoryList = new ArrayList<File>(1000);
     } 
 }
