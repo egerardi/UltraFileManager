@@ -68,51 +68,6 @@ public class DirectoryPathsToTree {
         return directoryList;
     }
     
-//    private static void printHtml(Node node, PrintStream out) {
-//        Map<String, Node> children = node.getChildren();
-//        if (children.isEmpty())
-//            return;
-//        for (int j = 0; j < count; j++)
-//        {
-//        	out.print("\t");
-//        }
-//        count++;
-//        out.println("<ul>");
-//        for (Map.Entry<String, Node> child : children.entrySet()) {
-//        	 for (int j = 0; j <= count; j++)
-//             {
-//             	out.print("\t");
-//             }
-//            out.print("<li>");
-//            out.print(count + "\t" + child.getKey());
-//            out.println();
-//            printHtml(child.getValue(), out);
-//            for (int j = 0; j <= count; j++)
-//            {
-//            	out.print("\t");
-//            }
-//            out.println("</li>");
-//        }
-//        count--;
-//        for (int j = 0; j < count; j++)
-//        {
-//        	out.print("\t");
-//        }
-//        out.println("</ul>");
-//    }
-//
-//    private void printHtml(PrintStream out) {
-//        printHtml(root, out);
-//    }
-//
-//    public void print(List<File> pathlist) {
-//        for(int i = 0; i < pathlist.size(); i++)
-//    	{
-//    		addPath(pathlist.get(i).getPath());
-//    	}
-//        
-//        printHtml(System.out);
-//    }
     
     public DirectoryPathsToTree() {
     	directoryList = new ArrayList<>(1000);
